@@ -1,0 +1,122 @@
+.info {
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    height: 0;
+    position: relative;
+
+    &.active {
+        height: 700px;
+        transition: .5s;
+    }
+
+    &__bg {
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        right: 0;
+        width: 60%;
+        height: 100%;
+    }
+
+    &__cancel {
+        height: 56px;
+        width: 56px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        cursor: pointer;
+        position: absolute;
+        top: 30px;
+        right: 30px;
+    }
+
+    &__content {
+        padding-left: 50px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        row-gap: 30px;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(85deg, rgb(0, 0, 0) 40%, rgba(0, 0, 0, 0.2) 62%, rgba(0, 0, 0, 0) 93%);
+    }
+
+    &__title {
+        color: rgb(255, 255, 255);
+        font-family: "Raleway";
+        font-size: 50px;
+        font-weight: 700;
+        line-height: 59px;
+        letter-spacing: 0%;
+        text-align: left;
+    }
+
+    &__text {
+        color: rgb(255, 255, 255);
+        font-family: 'Raleway';
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 30px;
+        letter-spacing: 0%;
+        text-align: left;
+        max-width: 935px;
+    }
+
+    &__genres {
+        display: flex;
+        align-items: center;
+        column-gap: 20px;
+        list-style: none;
+    }
+
+    &__genre {
+        color: rgba(255, 255, 255, 0.6);
+        font-family: 'Montserrat';
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 30px;
+        letter-spacing: 0%;
+        text-align: left;
+    }
+
+    &__actors {
+        max-width: 500px;
+        display: flex;
+        align-items: center;
+        column-gap: 17px;
+        row-gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    &__actor {
+        box-sizing: border-box;
+        border: 1px solid rgb(255, 255, 255);
+        border-radius: 25px;
+        background: rgba(20, 20, 20, 0.5);
+        display: flex;
+        align-items: center;
+        column-gap: 10px;
+        padding:1px 15px 1px 1px;
+    }
+
+    &__actor_image {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        object-fit: cover;
+        object-position: top;
+    }
+
+    &__actor_name {
+        color: rgb(255, 255, 255);
+        font-family: 'Raleway';
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 30px;
+        letter-spacing: 0%;
+        text-align: center;
+    }
+}

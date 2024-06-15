@@ -1,0 +1,22 @@
+.more {
+    border-radius: 10px;
+    background: rgb(20, 154, 3);
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+
+    &__icon {
+        width: 20px;
+        height: 18px;
+    }
+
+    &__text {
+        color: rgb(255, 255, 255);
+        font-family: 'Raleway';
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 30px;
+    }
+}

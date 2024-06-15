@@ -1,0 +1,30 @@
+.footer {
+    background: rgb(31, 31, 31);
+    padding: 30px 50px 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &__list {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    &__info {
+        align-self: flex-start;
+        margin-top: 50px;
+        margin-bottom: 80px;
+    }
+
+    &__text {
+        color: rgb(165, 165, 165);
+        font-family: 'Montserrat';
+        font-size: 20px;
+        font-weight: 300;
+        line-height: 24px;
+        text-align: left;
+        margin-bottom: 20px;
+    }
+}
