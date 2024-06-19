@@ -26,7 +26,7 @@ function Movies() {
         <h2 className={styles.movie__title}>Все фильмы</h2>
         <div className={styles.movie__cards}>
           {upcomingMovies.results.map((el) => (
-            <Card data={el} key={el.id} />
+            <Card data={el} key={el.id} type={"movie"} />
           ))}
         </div>
         <ReactPaginate

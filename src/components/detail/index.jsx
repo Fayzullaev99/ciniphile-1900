@@ -2,20 +2,37 @@ import { useParams } from 'react-router-dom'
 import play from '../../images/play.png'
 import user from '../../images/user.png'
 import styles from './detail.module.scss'
-import useGetData from '../../hooks/useGetData'
 import Loader from '../../ui/loader/Loader'
 import Recommend from '../recommend'
 import Container from '../../layout/container'
 import Thriller from '../thriller'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import Actor from '../../ui/actor'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchData } from '../../store/dataSlice'
 
 function Detail() {
   const [thriller,setThriller] = useState(false)
-  const { id } = useParams()
-  const [data] = useGetData(`movie/${id}`, id)
-  const [casts] = useGetData(`movie/${id}/credits`, id)
-  const [video] = useGetData(`movie/${id}/videos`,id)
-  if (!data || !casts || !video) return <Loader />
+  const { type, id } = useParams()
+  const dispatch = useDispatch()
+  const {infoMovie, infoSerie, castsMovie, castsSerie, recommendMovie, recommendSerie, videoMovie, videoSerie} = useSelector(state => state.data)
+
+  useEffect(()=>{
+    if (type && id) {
+      dispatch(fetchData(`${type}/${id}`))
+      dispatch(fetchData(`${type}/${id}/credits`))
+      dispatch(fetchData(`${type}/${id}/recommendations`))
+      dispatch(fetchData(`${type}/${id}/videos`))
+    }
+  },[type,id])
+
+  const data = type == 'movie' ? infoMovie : infoSerie
+  const casts = type == 'movie' ? castsMovie : castsSerie
+  const recommend = type == 'movie' ? recommendMovie : recommendSerie
+  const video = type == 'movie' ? videoMovie : videoSerie
+
+  if (!data || !casts || !video || !recommend) return <Loader />
+  console.log(video);
   return (
     <>
       <section className={styles.detail}>
@@ -38,10 +55,7 @@ function Detail() {
           <p className={styles.detail__role}>В главных ролях</p>
           <div className={styles.detail__actors}>
             {casts.cast.slice(0, 4).map((el) => (
-              <div className={styles.detail__actor} key={el.id}>
-                <img src={el.profile_path ? import.meta.env.VITE_DB_W500 + el.profile_path : user} alt="actor" className={styles.detail__actor_image} />
-                <p className={styles.detail__actor_name}>{el.name}</p>
-              </div>
+              <Actor data={el} key={el.id} />
             ))}
           </div>
         </div>
@@ -50,11 +64,11 @@ function Detail() {
         <div className={styles.detail__info}>
           <div className={styles.detail__info_box}>
             <h4 className={styles.detail__info_title}>Бюджет</h4>
-            <p className={styles.detail__info_text}>${data.budget.toLocaleString()}</p>
+            <p className={styles.detail__info_text}>${data?.budget?.toLocaleString()}</p>
           </div>
           <div className={styles.detail__info_box}>
             <h4 className={styles.detail__info_title}>Сборы</h4>
-            <p className={styles.detail__info_text}>${data.revenue.toLocaleString()}</p>
+            <p className={styles.detail__info_text}>${data?.revenue?.toLocaleString()}</p>
           </div>
           <div className={styles.detail__info_box}>
             <h4 className={styles.detail__info_title}>Статус</h4>
@@ -65,9 +79,9 @@ function Detail() {
             <p className={styles.detail__info_text}>{data.tagline || "no name"}</p>
           </div>
         </div>
-        <Recommend id={id} />
+        <Recommend data={recommend} />
       </Container>
-      <Thriller video={video} thriller={thriller} setThriller={setThriller} />
+      {video.results.length && <Thriller video={video} thriller={thriller} setThriller={setThriller} />}
     </>
   )
 }

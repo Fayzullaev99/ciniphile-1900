@@ -10,13 +10,16 @@ import { fetchData } from '../../store/dataSlice'
 function Search() {
   const [search, setSearch] = useState('')
   const dispatch = useDispatch()
-  const {searchResults} = useSelector(state => state.data)
+  const {searchResults, popularMovies} = useSelector(state => state.data)
 
   useEffect(()=>{
     dispatch(fetchData(`search/multi?query=${search}&language=en-US`))
+    if (!popularMovies) {
+      dispatch(fetchData(`movie/popular`))
+    }
   },[search])
 
-  if (!searchResults) return <Loader />
+  if (!searchResults || !popularMovies) return <Loader />
   return (
     <div className={styles.search}>
       <Container className={styles.search__container}>
@@ -34,7 +37,7 @@ function Search() {
             ))}
           </div>
         ) : (
-          <Recommend />
+          <Recommend data={popularMovies} />
         )}
 
 

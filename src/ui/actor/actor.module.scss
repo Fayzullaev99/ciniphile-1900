@@ -1,0 +1,28 @@
+.actor {
+    box-sizing: border-box;
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 25px;
+    background: rgba(20, 20, 20, 0.5);
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    padding: 1px 15px 1px 1px;
+
+    &__image {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        object-fit: cover;
+        object-position: top;
+    }
+
+    &__name {
+        color: rgb(255, 255, 255);
+        font-family: 'Raleway';
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 30px;
+        letter-spacing: 0%;
+        text-align: center;
+    }
+}

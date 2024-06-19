@@ -19,8 +19,14 @@ const initialState = {
     upcomingSeries:null,
     searchResults:null,
     rating:null,
-    tvInfo:null,
-    movieInfo:null
+    infoMovie:null,
+    infoSerie:null,
+    castsMovie:null,
+    castsSerie:null,
+    recommendMovie:null,
+    recommendSerie:null,
+    videoMovie:null,
+    videoSerie:null,
 }
 
 const dataSlice = createSlice({
@@ -41,6 +47,22 @@ const dataSlice = createSlice({
                 state.upcomingSeries = action.payload
             }else if (path.includes('search/multi')) {
                 state.searchResults = action.payload
+            }else if (path.match(/movie\/\d+$/)) {
+                state.infoMovie = action.payload
+            }else if (path.match(/tv\/\d+$/)) {
+                state.infoSerie = action.payload
+            }else if (path.match(/movie\/\d+\/credits$/)) {
+                state.castsMovie = action.payload
+            }else if (path.match(/tv\/\d+\/credits$/)) {
+                state.castsSerie = action.payload
+            }else if (path.match(/movie\/\d+\/recommendations$/)) {
+                state.recommendMovie = action.payload
+            }else if (path.match(/tv\/\d+\/recommendations$/)) {
+                state.recommendSerie = action.payload
+            }else if (path.match(/movie\/\d+\/videos$/)) {
+                state.videoMovie = action.payload
+            }else if (path.match(/tv\/\d+\/videos$/)) {
+                state.videoSerie = action.payload
             }
             
         })

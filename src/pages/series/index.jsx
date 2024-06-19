@@ -26,7 +26,7 @@ function Series() {
         <h2 className={styles.serie__title}>Все сереалы</h2>
         <div className={styles.serie__cards}>
           {upcomingSeries.results.map((el) => (
-            <Card data={el} key={el.id} />
+            <Card data={el} key={el.id} type={"tv"} />
           ))}
         </div>
         <ReactPaginate
